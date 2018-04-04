@@ -265,7 +265,7 @@ class Product(object):
 
 
 class Client(object):
-    SERVICE_URL = "https://payment.verkkomaksut.fi/api-payment/create"
+    SERVICE_URL = "https://payment.paytrail.com/api-payment/create"
 
     def __init__(self, merchant_id='13466',
                        merchant_secret='6pKF4jkv97zmqBJ3ZL8gUw5DfT2NMQ'):
@@ -295,7 +295,8 @@ class Client(object):
 
         """
         response = self.session.post(self.SERVICE_URL,
-            data=json.dumps(payment.json)
+            data=json.dumps(payment.json),
+            verify=('entrust_g2_ca.cer'),
         )
 
         if response.status_code != requests.codes.created:
